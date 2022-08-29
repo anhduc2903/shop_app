@@ -6,6 +6,7 @@ class ProductModel with ChangeNotifier {
   final String? imageUrl;
   final String? title;
   final int? price;
+  bool isFavorite;
 
   ProductModel({
     this.id,
@@ -13,6 +14,7 @@ class ProductModel with ChangeNotifier {
     this.imageUrl,
     this.title,
     this.price,
+    this.isFavorite = false,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -33,4 +35,9 @@ class ProductModel with ChangeNotifier {
         "title": title,
         "price": price
       };
+
+  void toggleFavoriteStatus() {
+    isFavorite = !isFavorite;
+    notifyListeners();
+  }
 }

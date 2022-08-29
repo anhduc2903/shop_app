@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import '../models/product_model.dart';
 
 class ProductController with ChangeNotifier {
-  List<ProductModel> _allProducts = [];
+  final List<ProductModel?> _allProducts = [];
 
-  List<ProductModel> get allProducts => [..._allProducts];
+  List<ProductModel?> get allProducts => [..._allProducts];
 
   Future<void> getData() async {
     try {

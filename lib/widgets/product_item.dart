@@ -11,7 +11,8 @@ class ProductItem extends StatefulWidget {
 }
 
 class _ProductItemState extends State<ProductItem> {
-  ProductModel? get product => context.watch<ProductModel?>();
+  ProductModel? get _readProduct => context.read<ProductModel>();
+  ProductModel? get _watchProduct => context.watch<ProductModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +22,27 @@ class _ProductItemState extends State<ProductItem> {
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite),
-            color: Theme.of(context).colorScheme.secondary,
+            onPressed: () {
+              _readProduct?.toggleFavoriteStatus();
+            },
+            icon: Icon(_readProduct?.isFavorite ?? false
+                ? Icons.favorite
+                : Icons.favorite_border),
+            color: Colors.red,
           ),
           title: Text(
-            product?.title ?? "",
+            _readProduct?.title ?? "",
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {},
-            color: Theme.of(context).colorScheme.secondary,
+            color: Colors.red,
           ),
         ),
         child: Image.network(
           fit: BoxFit.cover,
-          product?.imageUrl ?? "",
+          _watchProduct?.imageUrl ?? "",
         ),
       ),
     );
