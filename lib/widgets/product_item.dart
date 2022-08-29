@@ -12,7 +12,6 @@ class ProductItem extends StatefulWidget {
 
 class _ProductItemState extends State<ProductItem> {
   ProductModel? get _readProduct => context.read<ProductModel>();
-  ProductModel? get _watchProduct => context.watch<ProductModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +20,16 @@ class _ProductItemState extends State<ProductItem> {
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            onPressed: () {
-              _readProduct?.toggleFavoriteStatus();
-            },
-            icon: Icon(_readProduct?.isFavorite ?? false
-                ? Icons.favorite
-                : Icons.favorite_border),
-            color: Colors.red,
+          leading: Consumer<ProductModel>(
+            builder: (ctx, product, _) => IconButton(
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+              color: Colors.red,
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
+            ),
           ),
           title: Text(
             _readProduct?.title ?? "",
@@ -42,7 +43,7 @@ class _ProductItemState extends State<ProductItem> {
         ),
         child: Image.network(
           fit: BoxFit.cover,
-          _watchProduct?.imageUrl ?? "",
+          _readProduct?.imageUrl ?? "",
         ),
       ),
     );
