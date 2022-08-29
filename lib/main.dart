@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/screens/home_screen.dart';
+
+import './controllers/product_controller.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,12 +17,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         fontFamily: 'Lato',
       ),
-      home: HomeScreen(),
-      // routes: {
-      //   ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-      //   CartScreen.routeName: (ctx) => CartScreen(),
-      //   OrdersScreen.routeName: (ctx) => OrdersScreen(),
-      // }
+      home: ChangeNotifierProvider(
+        create: (ctx) => ProductController()..getData(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }
