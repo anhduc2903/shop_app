@@ -14,6 +14,8 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  String get productId => ModalRoute.of(context)?.settings.arguments as String;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
