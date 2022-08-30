@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/product_model.dart';
+import '../screens/product_detail_screen.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({Key? key}) : super(key: key);
@@ -41,9 +42,17 @@ class _ProductItemState extends State<ProductItem> {
             color: Colors.red,
           ),
         ),
-        child: Image.network(
-          fit: BoxFit.cover,
-          _readProduct?.imageUrl ?? "",
+        child: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              ProductDetailScreen.routeName,
+              arguments: _readProduct?.id,
+            );
+          },
+          child: Image.network(
+            fit: BoxFit.cover,
+            _readProduct?.imageUrl ?? "",
+          ),
         ),
       ),
     );

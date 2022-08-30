@@ -5,7 +5,7 @@ class ProductModel with ChangeNotifier {
   final String? description;
   final String? imageUrl;
   final String? title;
-  final int? price;
+  final num? price;
   bool isFavorite;
 
   ProductModel({
@@ -25,7 +25,7 @@ class ProductModel with ChangeNotifier {
         imageUrl:
             json["imageUrl"] is String ? (json)["imageUrl"] as String : null,
         title: json["title"] is String ? (json)["title"] as String : null,
-        price: json["price"] is int ? (json)["price"] as int : null,
+        price: json["price"] is num ? (json)["price"] as num : null,
       );
 
   Map<String, dynamic> toJson() => {

@@ -20,4 +20,8 @@ class ProductController with ChangeNotifier {
       debugPrint(e.toString());
     }
   }
+
+  ProductModel? findById(String? id) {
+    return _allProducts.firstWhere((prod) => prod?.id == id);
+  }
 }
