@@ -12,7 +12,7 @@ class ProductItem extends StatefulWidget {
 }
 
 class _ProductItemState extends State<ProductItem> {
-  ProductModel? get _readProduct => context.read<ProductModel>();
+  ProductModel? get _readProduct => context.watch<ProductModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,8 @@ class _ProductItemState extends State<ProductItem> {
             );
           },
           child: Image.network(
-            fit: BoxFit.cover,
             _readProduct?.imageUrl ?? "",
+            fit: BoxFit.cover,
           ),
         ),
       ),

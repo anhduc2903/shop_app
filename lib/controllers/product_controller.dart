@@ -21,6 +21,10 @@ class ProductController with ChangeNotifier {
     }
   }
 
+  List<ProductModel?> get favoriteItems {
+    return _allProducts.where((prodItem) => (prodItem?.isFavorite ?? false)).toList();
+  }
+
   ProductModel? findById(String? id) {
     return _allProducts.firstWhere((prod) => prod?.id == id);
   }
