@@ -25,6 +25,10 @@ class ProductController with ChangeNotifier {
     return _allProducts.where((prodItem) => (prodItem?.isFavorite ?? false)).toList();
   }
 
+  List<ProductModel?> get filterPriceItems {
+    return _allProducts.where((prodItem) => (prodItem?.price ?? 0) < 30).toList();
+  }
+
   ProductModel? findById(String? id) {
     return _allProducts.firstWhere((prod) => prod?.id == id);
   }

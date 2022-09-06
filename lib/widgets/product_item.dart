@@ -12,7 +12,8 @@ class ProductItem extends StatefulWidget {
 }
 
 class _ProductItemState extends State<ProductItem> {
-  ProductModel? get _readProduct => context.watch<ProductModel>();
+  ProductModel? get _watchProduct => context.watch<ProductModel>();
+  ProductModel? get _readProduct => context.read<ProductModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class _ProductItemState extends State<ProductItem> {
             ),
           ),
           title: Text(
-            _readProduct?.title ?? "",
+            _watchProduct?.title ?? "",
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
@@ -50,7 +51,7 @@ class _ProductItemState extends State<ProductItem> {
             );
           },
           child: Image.network(
-            _readProduct?.imageUrl ?? "",
+            _watchProduct?.imageUrl ?? "",
             fit: BoxFit.cover,
           ),
         ),

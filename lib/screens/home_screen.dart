@@ -5,6 +5,7 @@ import '../widgets/products_grid.dart';
 enum FilterOptions {
   Favorites,
   All,
+  FilterPrice
 }
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   var _showOnlyFavorites = false;
+  var _filterPrice = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,13 @@ class _HomeScreenState extends State<HomeScreen> {
               setState(() {
                 if (selectedValue == FilterOptions.Favorites) {
                   _showOnlyFavorites = true;
+                  _filterPrice = false;
+                } else if (selectedValue == FilterOptions.All) {
+                  _showOnlyFavorites = false;
+                  _filterPrice = false;
                 } else {
                   _showOnlyFavorites = false;
+                  _filterPrice = true;
                 }
               });
             },
@@ -46,11 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Text('Show All'),
                 value: FilterOptions.All,
               ),
+              PopupMenuItem(
+                child: Text('Price < 30'),
+                value: FilterOptions.FilterPrice,
+              ),
             ],
           ),
         ],
       ),
-      body: ProductsGrid(showFavorite: _showOnlyFavorites,),
+      body: ProductsGrid(showFavorite: _showOnlyFavorites, filterPrice: _filterPrice),
     );
   }
 }

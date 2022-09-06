@@ -7,8 +7,11 @@ import '../controllers/product_controller.dart';
 
 class ProductsGrid extends StatefulWidget {
   final bool showFavorite;
+  final bool filterPrice;
 
-  const ProductsGrid({Key? key, required this.showFavorite}) : super(key: key);
+  const ProductsGrid(
+      {Key? key, required this.showFavorite, this.filterPrice = false})
+      : super(key: key);
 
   @override
   State<ProductsGrid> createState() => _ProductsGridState();
@@ -17,12 +20,17 @@ class ProductsGrid extends StatefulWidget {
 class _ProductsGridState extends State<ProductsGrid> {
   ProductController get _readProductController =>
       context.read<ProductController>();
+
   ProductController get _watchProductController =>
       context.watch<ProductController>();
 
   @override
   Widget build(BuildContext context) {
-    List<ProductModel?> products = widget.showFavorite ? _watchProductController.favoriteItems : _watchProductController.allProducts;
+    List<ProductModel?> products = widget.showFavorite
+        ? _watchProductController.favoriteItems
+        : widget.filterPrice
+            ? _watchProductController.filterPriceItems
+            : _watchProductController.allProducts;
 
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
