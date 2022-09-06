@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/controllers/cart_controller.dart';
 
 import '../models/product_model.dart';
 import '../screens/product_detail_screen.dart';
@@ -13,7 +14,10 @@ class ProductItem extends StatefulWidget {
 
 class _ProductItemState extends State<ProductItem> {
   ProductModel? get _watchProduct => context.watch<ProductModel>();
+
   ProductModel? get _readProduct => context.read<ProductModel>();
+
+  CartController get _readCartController => context.read<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,16 @@ class _ProductItemState extends State<ProductItem> {
           ),
           trailing: IconButton(
             icon: const Icon(Icons.shopping_cart),
-            onPressed: () {},
+            onPressed: () {
+              _readCartController.addItem(
+                _readProduct?.id ?? "",
+                double.parse("${_readProduct?.price ?? 0}"),
+                _readProduct?.title ?? "");
+
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("Thành công"),
+              ));
+            },
             color: Colors.red,
           ),
         ),
