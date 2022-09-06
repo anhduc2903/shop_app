@@ -50,7 +50,7 @@ class _CartScreenState extends State<CartScreen> {
                   FlatButton(
                     child: Text('ORDER NOW'),
                     onPressed: () {
-                      _readCartController.clear();
+                      // _readCartController.clear();
                     },
                     textColor: Theme.of(context).primaryColor,
                   )
