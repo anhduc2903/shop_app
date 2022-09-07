@@ -35,7 +35,7 @@ class CartController with ChangeNotifier {
           id: existingCartItem.id,
           title: existingCartItem.title,
           price: existingCartItem.price,
-          quantity: 1,
+          quantity: existingCartItem.quantity + 1,
         ),
       );
     } else {
@@ -49,6 +49,11 @@ class CartController with ChangeNotifier {
         ),
       );
     }
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
     notifyListeners();
   }
 
